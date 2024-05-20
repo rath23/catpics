@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Images</title>
+    <style>
+        img {
+            width: 200px; 
+            height: auto; 
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div id="image-container"></div>
+    <button id="get-image-btn">Get Image</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#get-image-btn').click(function() {
+                $.get("/cat", function(data) {
+                    appendImage(data);
+                });
+            });
+        });
+
+        function appendImage(imageUrl) {
+            // Create a new image element
+            var imgElement = document.createElement('img');
+            imgElement.src = imageUrl;
+            imgElement.alt = "Random Cat Image";
+
+            // Append the new image to the image container
+            $('#image-container').append(imgElement);
+        }
+    </script>
+</body>
+</html>
